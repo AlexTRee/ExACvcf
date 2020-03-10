@@ -1,0 +1,14 @@
+Package: ExACvcf
+Title: Annotate VCF file with info from ExAC API bulk queries
+Version: 0.0.0.9000
+Authors@R: person("Tiange (Alex)", "Cui", email = "alextreecn1@gmail.com", role = c("aut", "cre"))
+Description: This library is used for clean up input VCF and use the Harvard Medical School's ExAC Browser API to bulk query variants and combine information into the previous VCF
+License: MIT
+Depends:
+    R (>= 3.3.0)
+Imports:
+    httr (>= 1.4.1),
+    jsonlite (>= 1.6.1)
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.0.2

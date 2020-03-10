@@ -1,0 +1,9 @@
+language: R
+ cache: packages
+ sudo: false
+
+ addons:
+   apt:
+     packages:
+       - libgsl0-dev
+       - libxml2-dev

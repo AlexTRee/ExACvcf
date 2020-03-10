@@ -12,3 +12,35 @@ For this challenge, you are asked to prototype a variant annotation tool. We wil
 
 For this project please upload all relevant code (written in whatever language you like) along with the annotated VCF file to a Github account and provide the link to the below email address. Please note that work will be assessed based on quality of code and documentation more-so than the annotation.
 
+
+# Solution:
+
+For this challenge, a driver R script was developed on RStudio (under /src/annotateVCF.R). It was then built into a package (code is under /R/ExACvcf.R). 
+
+There are three steps for generate the annotated file. 
+
+- The first step is to filter the input VCF file and get some basic information such as chromosome and position.
+- The second step is to filter the INFO field and construct call commands that can be used by ExAC API bulk queries.  
+- The last step is to format the array of information about the variants found in the ExAC database, and combine with the data frame generated in step one, and then return as a single data frame for output.
+
+In order to better annotate the variants, I chose to have the following information included in the output data frame: 
+
+Chromosome | Position | Reference_Allele | Alternate_Alleles | Type_of_Variation | Depth_of_Sequence_Coverage | Allele_Count_in_Genotypes | Variant_Reads_Percentage | Allele_Frequency | Variant_Consequences | Reference_SNP_ID | Ensembl_Gene_ID | Ensembl_Transcript_ID 
+
+
+# How to test:
+To test the package, you will need to do the following:
+
+1. Download  the ExACvcf.R package. You can either download and install the tar file, or clone the GitHub repo.
+   - From tar file, run: install.packages("ExACvcf_0.0.0.9000.tar.gz") 
+   - From GitHub, run: install_github("AlexTRee/TBC")
+2. Install required packages before running ExACvcf
+   - Run: install.packages(c("httr","jsonlite"))
+3. Make sure the input file is in place. (under /inst/extdata/challenge_data.vcf)
+4. Load the package, run the following commands:
+   - library(ExACvcf)
+   - input_file <- system.file("extdata", "challenge_data.vcf", package = "ExACvcf")
+   - output <- ExACvcf(input_file)
+   - write.table(output, "./annotated_challange_data.vcf", sep = "\t", quote=FALSE)
+
+The output file was uploaded under (/output/annotated_challange_data.vcf)
